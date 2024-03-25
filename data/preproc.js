@@ -31,7 +31,7 @@ const toFlds = [
 function slurp(file, fldsRe) {
     const re = new RegExp("^"+fldsRe.map(x => `(${x[1]})`).join('\\s*')+"$");
     const data = fs.readFileSync(file, 'utf8');
-    console.log({re})
+    //console.log({re})
     return data.split('\n').map(ln => {
         const flds = ln.match(re);
         //console.log(flds.length, fldsRe.length+1);

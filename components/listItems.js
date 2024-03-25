@@ -8,29 +8,46 @@ import InfoIcon from '@mui/icons-material/Info';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import GavelIcon from '@mui/icons-material/Gavel';
+import Link from '@mui/material/Link';
+import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
+import PropTypes from 'prop-types';
 
+// https://mui.com/material-ui/integrations/routing/#link
+// FIXME: not working for somne reason
+function Router(props) {
+  const { children } = props;
+  if (typeof window === 'undefined') {
+    return <StaticRouter location="/">{children}</StaticRouter>;
+  }
+
+  return <MemoryRouter>{children}</MemoryRouter>;
+}
+Router.propTypes = {
+  children: PropTypes.node,
+};
 
 export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
+  <Router>
+    <Link href="/" underline="hover" color="inherit"><ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton></Link>
+    <Link href="/rawdata" underline="hover" color="inherit"><ListItemButton>
       <ListItemIcon>
         <CloudDownloadIcon />
       </ListItemIcon>
       <ListItemText primary="Downloads" />
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton></Link>
+    <Link href="/about" underline="hover" color="inherit"><ListItemButton>
       <ListItemIcon>
         <InfoIcon />
       </ListItemIcon>
       <ListItemText primary="About" />
-    </ListItemButton>
-  </React.Fragment>
+    </ListItemButton></Link>
+  </Router>
 );
 
 export const secondaryListItems = (

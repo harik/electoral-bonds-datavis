@@ -18,6 +18,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import 'dayjs/locale/en-in';
 
 function Copyright(props) {
   return (
@@ -84,6 +87,7 @@ export default function RootLayout({ children }) {
   };
   return (
         <ThemeProvider theme={defaultTheme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-in" >
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppBar position="absolute" open={open}>
@@ -154,6 +158,7 @@ export default function RootLayout({ children }) {
             </Container>
           </Box>
         </Box>
+      </LocalizationProvider>
       </ThemeProvider>
   )
 }
